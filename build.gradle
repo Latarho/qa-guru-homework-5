@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+// Версия Java
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+// Актуально для старых версий windows
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // Selenide
+    testImplementation("com.codeborne:selenide:6.3.2")
+    testRuntimeOnly('org.slf4j:slf4j-simple:1.7.36')
+
+
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+
+}
+// Gradle по умолчанию использует JUnit 5, данная строка нужна для того чтобы использовать JUnit 5
+test {
+    useJUnitPlatform{}
+}
